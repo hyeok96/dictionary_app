@@ -1,3 +1,5 @@
+import 'package:dictionary_app/model/dictionary_model.dart';
+import 'package:dictionary_app/widgets/word_card.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +11,19 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  DictionaryModel? dict;
   Dio dio = Dio();
 
   searchWord(String word) async {
     String url = "https://api.dictionaryapi.dev/api/v2/entries/en/$word";
-    var res = await dio.get(url);
-    print(res.data);
+    try {
+      var res = await dio.get(url);
+      dict = DictionaryModel.fromMap(res.data[0]);
+      setState(() {});
+    } catch (e) {
+      dict = null;
+      setState(() {});
+    }
   }
 
   @override
@@ -56,6 +65,11 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ],
             ),
+            const Divider(),
+            if (dict != null)
+              Expanded(
+                child: WordCard(dict: dict!),
+              )
           ],
         ),
       ),

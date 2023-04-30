@@ -3,8 +3,8 @@ import 'package:dictionary_app/model/meaning_model.dart';
 import 'package:dictionary_app/model/phonetic_model.dart';
 
 class DictionaryModel {
-  String? word;
-  String phonetic;
+  String word;
+  String? phonetic;
   List<PhoneticModel> phonetics;
   List<MeaningModel> meanings;
   LicenseModel license;
@@ -32,7 +32,7 @@ class DictionaryModel {
           (e) => MeaningModel.fromMap(e),
         ),
       ),
-      license: map["license"].map((e) => LicenseModel.fromMap(e)).toList(),
+      license: LicenseModel.fromMap(map["license"]),
       sourceUrls: List<String>.from(
         map["sourceUrls"],
       ),
