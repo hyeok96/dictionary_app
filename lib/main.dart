@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "dictionary_app",
+      title: "dictionaryApp",
       theme: ThemeData.dark(),
       home: const MainScreen(),
     );
